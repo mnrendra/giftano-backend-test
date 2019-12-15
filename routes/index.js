@@ -1,13 +1,14 @@
-// require express module
-const express = require('express')
-// set router
-const router = express.Router()
+// require express Router
+const router = require('express').Router()
+// require route modules
+const home = require('./home')
+// require error handlers
+const { errorHandler, notFound } = require('./errors')
 
-router.get('/', (req, res) => {
-  res.status(200).json({
-    status: 200,
-    message: 'hallo Giftano!'
-  })
-})
+// routes middleware
+router.use('/', home)
+// error middleware
+router.all('/*', notFound)
+router.use(errorHandler)
 
 module.exports = router
