@@ -1,0 +1,6 @@
+{
+  "DEV": {
+    "DEV_PORT": 3000,
+    "DEV_DB": "mongodb://127.0.0.1:27017/giftano-backend"
+  }
+}

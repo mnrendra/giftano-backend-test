@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/mnrendra/giftano-backend-test#readme",
   "dependencies": {
+    "compression": "^1.7.4",
     "config": "^3.2.4",
     "express": "^4.17.1",
-    "mongoose": "^5.8.1"
+    "helmet": "^3.21.2",
+    "mongoose": "^5.8.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
