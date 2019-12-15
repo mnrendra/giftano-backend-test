@@ -1,0 +1,27 @@
+{
+  "name": "giftano-backend-test",
+  "version": "1.0.0",
+  "description": "My Giftano backend take home assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnrendra/giftano-backend-test.git"
+  },
+  "author": "Muhammad Rendra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mnrendra/giftano-backend-test/issues"
+  },
+  "homepage": "https://github.com/mnrendra/giftano-backend-test#readme",
+  "dependencies": {
+    "config": "^3.2.4",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
