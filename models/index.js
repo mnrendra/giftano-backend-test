@@ -3,5 +3,6 @@ module.exports = {
   Brand: require('./Brand'),
   Category: require('./Category'),
   DelivOpt: require('./DelivOpt'),
-  Occasion: require('./Occasion')
+  Occasion: require('./Occasion'),
+  ToWhom: require('./ToWhom')
 }
