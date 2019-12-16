@@ -4,9 +4,10 @@ const idInvalid = (id, res) => {
     status: 400,
     error: {
       name: 'invalid id!',
-      message: `${id} id is not valid! Please input the correct id!`
+      message: `${id} is not valid id! Please input the correct id!`
     }
   })
 }
 
+// export module
 module.exports = idInvalid

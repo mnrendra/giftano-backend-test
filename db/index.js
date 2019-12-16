@@ -4,7 +4,7 @@ const config = require('config')
 // require local modules
 const logger = require('../logger')
 
-// require config
+// require DEV config
 const { DEV_DB } = config.get('DEV')
 
 // set databse url
@@ -13,19 +13,21 @@ const DB_URL = process.env.DB_URL || DEV_DB
 // set connection
 mongoose
   .connect(DB_URL, {
-    // mongodb options
+    // set mongodb options
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
   })
   .then(({ connections }) => {
-    // log databse properties
+    // destructuring user, host, port, and name of database from mongoose connections
     const { user, host, port, name } = connections[0]
-    logger.info(`db connected on ${user}@${host}:${port}/${name}`)
+    // logging databse properties
+    logger.info(`${new Date()} : db connected on ${user || 'root'}@${host}:${port}/${name}`)
   })
-  .catch(error => {
-    // log catch error
-    logger.error(error)
+  .catch(({ stack }) => {
+    // logging catch error
+    logger.error(`${new Date()} : ${stack}`)
   })
 
+// export module
 module.exports = mongoose

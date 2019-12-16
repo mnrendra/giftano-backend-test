@@ -4,9 +4,10 @@ const idRequired = (req, res) => {
     status: 400,
     error: {
       name: 'id params is required!',
-      message: 'id parameter is required'
+      message: 'id parameter is required!'
     }
   })
 }
 
+// export module
 module.exports = idRequired

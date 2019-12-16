@@ -1,6 +1,11 @@
+// require logger modules
+const logger = require('../../logger')
 // error handler
-const errorHandler = ({ name, message }, req, res, next) => {
-  res.statu(500).json({
+const errorHandler = ({ name, message, stack }, req, res, next) => {
+  // loging error into logs file
+  logger.error(`${new Date()} : ${stack}`)
+  // send error message to client
+  res.status(500).json({
     status: 500,
     error: {
       name,
@@ -10,4 +15,5 @@ const errorHandler = ({ name, message }, req, res, next) => {
   next()
 }
 
+// export module
 module.exports = errorHandler

@@ -1,4 +1,4 @@
-// id not found handler
+// not found id handler
 const idNotFound = (id, res) => {
   res.status(400).json({
     status: 400,
@@ -9,4 +9,5 @@ const idNotFound = (id, res) => {
   })
 }
 
+// export module
 module.exports = idNotFound

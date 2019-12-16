@@ -9,10 +9,10 @@ const config = require('config')
 const logger = require('./logger')
 const routes = require('./routes')
 
-// require config
+// require DEV config
 const { DEV_PORT } = config.get('DEV')
 
-// set app
+// set init app
 const app = express()
 
 // middleware
@@ -24,4 +24,4 @@ app.use(routes)
 // set port
 const PORT = process.env.PORT || DEV_PORT
 // start listening
-app.listen(PORT, logger.info(`listen on port ${PORT}`))
+app.listen(PORT, logger.info(`${new Date()} : listen on port ${PORT}`))

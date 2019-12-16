@@ -9,4 +9,5 @@ const methodNotAllowed = ({ method }, res) => {
   })
 }
 
+// export module
 module.exports = methodNotAllowed
