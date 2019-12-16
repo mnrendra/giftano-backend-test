@@ -6,6 +6,7 @@ const ageRanges = require('./ageRanges')
 const brands = require('./brands')
 const categories = require('./categories')
 const delivOpts = require('./delivOpts')
+const occasions = require('./occasions')
 // require error handlers
 const { errorHandler, notFound } = require('./errors')
 
@@ -15,6 +16,7 @@ router.use('/ageranges', ageRanges)
 router.use('/brands', brands)
 router.use('/categories', categories)
 router.use('/delivopts', delivOpts)
+router.use('/occasions', occasions)
 // error middleware
 router.use('/*', notFound)
 router.use(errorHandler)
