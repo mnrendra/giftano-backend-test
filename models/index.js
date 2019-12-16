@@ -1,3 +1,4 @@
 module.exports = {
-  AgeRange: require('./AgeRange')
+  AgeRange: require('./AgeRange'),
+  Brand: require('./Brand')
 }
