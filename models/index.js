@@ -4,5 +4,6 @@ module.exports = {
   Category: require('./Category'),
   DelivOpt: require('./DelivOpt'),
   Occasion: require('./Occasion'),
+  Product: require('./Product'),
   ToWhom: require('./ToWhom')
 }

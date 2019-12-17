@@ -8,6 +8,7 @@ const categories = require('./categories')
 const delivOpts = require('./delivOpts')
 const occasions = require('./occasions')
 const toWhoms = require('./toWhoms')
+const products = require('./products')
 // require error handlers
 const { errorHandler, notFound } = require('./errors')
 
@@ -19,6 +20,7 @@ router.use('/categories', categories)
 router.use('/delivopts', delivOpts)
 router.use('/occasions', occasions)
 router.use('/towhoms', toWhoms)
+router.use('/products', products)
 // error middleware
 router.use('/*', notFound)
 router.use(errorHandler)

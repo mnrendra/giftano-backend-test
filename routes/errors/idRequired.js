@@ -1,5 +1,5 @@
 // id required handler
-const idRequired = (req, res) => {
+const idRequired = (res) => {
   res.status(400).json({
     status: 400,
     error: {
