@@ -1,5 +1,7 @@
-// invalid id handler
-const idInvalid = (id, res) => {
+/**
+ * indvalidId function
+ */
+const invalidId = (res, id) => {
   res.status(400).json({
     status: 400,
     error: {
@@ -10,4 +12,4 @@ const idInvalid = (id, res) => {
 }
 
 // export module
-module.exports = idInvalid
+module.exports = invalidId

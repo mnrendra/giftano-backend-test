@@ -1,26 +1,44 @@
+// require PRODUCT_PROPERTY config
+const { MIN_VALUE, MAX_VALUE } = require('config').PRODUCT_PROPERTY
 // require AgeRange model
 const { AgeRange } = require('../../models')
+// require error module
+const { requireField, invalidField, alreadyCreated } = require('../../errors')
 
 /**
  * postAgeRanges function
  */
 const postAgeRanges = ({ body }, res, next) => {
-  // destructuring value data from body
+  // destructuring value data from body field
   const { value } = body
+
+  /* validating body fields */
+
+  // validate value field
+  if (!value) {
+    requireField(res, 'value')
+    return
+  }
+  // length value cannot be less than MIN_VALUE characters
+  if (value.length < MIN_VALUE) {
+    invalidField(res, `length value cannot be less than ${MIN_VALUE} characters`)
+    return
+  }
+  // length value cannot be more than MAX_VALUE characters
+  if (value.length > MAX_VALUE) {
+    invalidField(res, `length value cannot be more than ${MAX_VALUE} characters`)
+    return
+  }
+
+  /* check existing first */
 
   // check existing first
   AgeRange
     .findOne({ value })
     .then(ageRange => {
-      // return false if same value have been exist
+      // ignore save if same value have been exist
       if (ageRange) {
-        res.status(400).json({
-          status: 400,
-          error: {
-            name: 'have been created!',
-            message: 'please create another one or delete this one.'
-          }
-        })
+        alreadyCreated(res, 'ageRange', value)
         return
       }
 
@@ -39,10 +57,8 @@ const postAgeRanges = ({ body }, res, next) => {
               value
             }
           })
-        })
-        .catch(next)
-    })
-    .catch(next)
+        }).catch(next)
+    }).catch(next)
 }
 
 // export module

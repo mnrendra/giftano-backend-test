@@ -8,6 +8,7 @@ const config = require('config')
 // require local modules
 const logger = require('./logger')
 const routes = require('./routes')
+const { invalidJsonHandler } = require('./errors')
 
 // require DEV config
 const { DEV_PORT } = config.get('DEV')
@@ -19,6 +20,7 @@ const app = express()
 app.use(helmet())
 app.use(compression())
 app.use(express.json())
+app.use(invalidJsonHandler)
 app.use(routes)
 
 // set port

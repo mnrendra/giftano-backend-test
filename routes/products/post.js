@@ -4,94 +4,94 @@ const { isValid } = require('mongoose').Types.ObjectId
 const { MIN_NAME, MAX_NAME, MIN_DESCRIPTION, MAX_DESCRIPTION, MIN_PRICE, MAX_PRICE, CURRENCY } = require('config').PRODUCT
 // require requirement models
 const { AgeRange, Brand, Category, DelivOpt, Occasion, Product, ToWhom } = require('../../models')
-// require error handlers
-const { fieldRequired, fieldInvalid, idNotFound } = require('../errors')
+// require error handler
+const { requireField, invalidField, notFoundId, alreadyCreated } = require('../../errors')
 
 /**
-  * postProducts
+  * postProducts function
   */
 const postProducts = ({ body }, res, next) => {
   // destructuring requirement fields
   const { name, description, price, ageRangeId, brandId, categoryId, delivOptId, occasionId, toWhomId } = body
 
-  /* validating body fileds */
+  /* validating body fields */
 
   // validate name field
   if (!name) {
-    fieldRequired(res, 'name')
+    requireField(res, 'name')
     return
   }
-  // name value should be more than MIN_NAME characters
+  // name value cannot be less than MIN_NAME characters
   if (name.length < MIN_NAME) {
-    fieldInvalid(res, `name value should be more than ${MIN_NAME} characters`)
+    invalidField(res, `name value cannot be less than ${MIN_NAME} characters`)
     return
   }
-  // name value should be less than MAX_NAME characters
+  // name value cannot be more than MAX_NAME characters
   if (name.length > MAX_NAME) {
-    fieldInvalid(res, `name value should be less than ${MAX_NAME} characters`)
+    invalidField(res, `name value cannot be more than ${MAX_NAME} characters`)
     return
   }
 
   // validate description field
   if (!description) {
-    fieldRequired(res, 'description')
+    requireField(res, 'description')
     return
   }
-  // description value should be more than MIN_DESCRIPTION characters
+  // description value cannot be less than MIN_DESCRIPTION characters
   if (description.length < MIN_DESCRIPTION) {
-    fieldInvalid(res, `description value should be more than ${MIN_DESCRIPTION} characters`)
+    invalidField(res, `description value cannot be less than ${MIN_DESCRIPTION} characters`)
     return
   }
-  // description value should be less than MAX_NAME characters
+  // description value cannot be more than MAX_NAME characters
   if (description.length > MAX_DESCRIPTION) {
-    fieldInvalid(res, `description value should be less than ${MAX_DESCRIPTION} characters`)
+    invalidField(res, `description value cannot be more than ${MAX_DESCRIPTION} characters`)
     return
   }
 
   // validate price field and the value should be number
   if (!Number(price)) {
-    fieldRequired(res, 'price', 'value should be number!')
+    requireField(res, 'price', 'value should be number!')
     return
   }
   // price value should be more than MIN_PRICE CURRENCY
   if (Number(price) <= MIN_PRICE) {
-    fieldInvalid(res, `price value should be more than ${MIN_PRICE} ${CURRENCY}`)
+    invalidField(res, `price value should be more than ${MIN_PRICE} ${CURRENCY}`)
     return
   }
   // price field should be less than MAX_PRICE CURRENCY
-  if (Number(price) > MAX_PRICE) {
-    fieldInvalid(res, `price value should be less than ${MAX_PRICE} ${CURRENCY}`)
+  if (Number(price) >= MAX_PRICE) {
+    invalidField(res, `price value should be less than ${MAX_PRICE} ${CURRENCY}`)
     return
   }
 
   // validate ageRangeId field and the value shoud be valid id
   if (!isValid(ageRangeId)) {
-    fieldRequired(res, 'ageRangeId', 'value should be valid id')
+    requireField(res, 'ageRangeId', 'value should be valid id')
     return
   }
   // validate brandId field and the value shoud be valid id
   if (!isValid(brandId)) {
-    fieldRequired(res, 'brandId', 'value should be valid id')
+    requireField(res, 'brandId', 'value should be valid id')
     return
   }
   // validate categoryId field and the value shoud be valid id
   if (!isValid(categoryId)) {
-    fieldRequired(res, 'categoryId', 'value should be valid id')
+    requireField(res, 'categoryId', 'value should be valid id')
     return
   }
   // validate delivOptId field and the value shoud be valid id
   if (!isValid(delivOptId)) {
-    fieldRequired(res, 'delivOptId', 'value should be valid id')
+    requireField(res, 'delivOptId', 'value should be valid id')
     return
   }
   // validate occasionId field and the value shoud be valid id
   if (!isValid(occasionId)) {
-    fieldRequired(res, 'occasionId', 'value should be valid id')
+    requireField(res, 'occasionId', 'value should be valid id')
     return
   }
   // validate toWhomId field and the value shoud be valid id
   if (!isValid(toWhomId)) {
-    fieldRequired(res, 'toWhom', 'value should be valid id')
+    requireField(res, 'toWhom', 'value should be valid id')
     return
   }
 
@@ -107,17 +107,12 @@ const postProducts = ({ body }, res, next) => {
     Occasion.findOne({ _id: occasionId }),
     ToWhom.findOne({ _id: toWhomId })
   ]).then(docs => {
+    // shifting first index as product document
     const product = docs.shift()
 
-    // return false if same product name have been created
+    // ignore save if same product name have been created
     if (product) {
-      res.status(400).json({
-        status: 400,
-        error: {
-          error: `${name} product have been created!`,
-          message: 'please create another product or delete this product.'
-        }
-      })
+      alreadyCreated(res, 'product', name)
       return
     }
 
@@ -128,7 +123,7 @@ const postProducts = ({ body }, res, next) => {
     docs.filter(doc => {
       // return false if one of properties id is not found
       if (!doc) {
-        idNotFound(['ageRangeId', 'brandId', 'categoryId', 'delivOptId', 'occasionId', 'toWhomId'][i], res)
+        notFoundId(res, ['ageRangeId', 'brandId', 'categoryId', 'delivOptId', 'occasionId', 'toWhomId'][i])
         return
       }
       // assign property value

@@ -3,7 +3,7 @@ const { isValid } = require('mongoose').Types.ObjectId
 // require Product model
 const { Product } = require('../../models')
 // require error handler
-const { idInvalid, idNotFound } = require('../errors')
+const { invalidId, notFoundId } = require('../../errors')
 
 /**
  * deleteOccasionsById function
@@ -14,7 +14,7 @@ const deleteProductsById = ({ params }, res, next) => {
 
   // return false if id invalid
   if (!isValid(id)) {
-    idInvalid(id, res)
+    invalidId(res, id)
     return
   }
 
@@ -22,9 +22,9 @@ const deleteProductsById = ({ params }, res, next) => {
   Product
     .findOne({ _id: id })
     .then(product => {
-      // return false if id not found
+      // return false if id is not found
       if (!product) {
-        idNotFound(id, res)
+        notFoundId(id, res)
         return
       }
 
@@ -32,12 +32,22 @@ const deleteProductsById = ({ params }, res, next) => {
       Product
         .deleteOne({ _id: id })
         .then(() => {
+          // destructuring product properties and keep _id, _v keys
+          const { _id, name, description, price, ageRange, brand, category, delivOpt, occasion, toWhom } = product
           res.status(200).json({
             status: 200,
             message: 'successfully delete product.',
             data: {
-              _id: product._id,
-              name: product.name
+              id: _id,
+              name,
+              description,
+              price,
+              ageRange,
+              brand,
+              category,
+              delivOpt,
+              occasion,
+              toWhom
             }
           })
         }).catch(next)

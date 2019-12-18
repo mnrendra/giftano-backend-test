@@ -10,7 +10,7 @@ const occasions = require('./occasions')
 const toWhoms = require('./toWhoms')
 const products = require('./products')
 // require error handlers
-const { errorHandler, notFound } = require('./errors')
+const { errorHandler, notFound } = require('../errors')
 
 // routes middleware
 router.use('/', home)

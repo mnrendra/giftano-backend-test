@@ -9,7 +9,17 @@
     "MIN_DESCRIPTION": 12,
     "MAX_DESCRIPTION": 255,
     "MIN_PRICE": 0,
-    "MAX_PRICE": 999999,
+    "MAX_PRICE": 1000000,
     "CURRENCY": "SGD"
+  },
+  "PRODUCT_PROPERTY": {
+    "MIN_VALUE": 3,
+    "MAX_VALUE": 99
+  },
+  "GET_PRODUCT_QUERY": {
+    "MIN_PRICE": 0,
+    "MAX_PRICE": 1000000,
+    "LIMIT": 3,
+    "PAGE": 0
   }
 }

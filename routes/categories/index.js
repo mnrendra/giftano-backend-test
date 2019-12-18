@@ -5,7 +5,7 @@ const { getCategories, getCategoriesById } = require('./get')
 const { postCategories } = require('./post')
 const { putCategoriesById } = require('./put')
 const { deleteCategoriesById } = require('./delete')
-const { methodNotAllowed, idRequired } = require('../errors')
+const { notAllowedMethod, requireId } = require('../../errors')
 
 // GET request
 router.get('/', getCategories)
@@ -13,13 +13,13 @@ router.get('/:id', getCategoriesById)
 // POST request
 router.post('/', postCategories)
 // PUT request
-router.put('/', idRequired)
+router.put('/', requireId)
 router.put('/:id', putCategoriesById)
 // DELETE request
-router.delete('/', idRequired)
+router.delete('/', requireId)
 router.delete('/:id', deleteCategoriesById)
 // ALL request
-router.all('/', methodNotAllowed)
+router.all('/', notAllowedMethod)
 
 // export module
 module.exports = router

@@ -1,33 +1,34 @@
+/**
+ * getPopulate function
+ */
 const getPopulate = doc => {
+  // return populated document in new promise
   return new Promise((resolve, reject) => {
+    // populating product properties
     doc
-      .populate('age')
+      .populate('ageRange')
       .populate('brand')
       .populate('category')
-      .populate({ path: 'price.currency', model: 'Currency' })
-      .populate('deliveryOption')
+      .populate('delivOpt')
       .populate('occasion')
       .populate('toWhom')
       .execPopulate()
-      .then(({ _id, name, description, price, age, brand, category, deliveryOption, occasion, toWhom }) => {
+      .then(({ _id, name, description, price, ageRange, brand, category, delivOpt, occasion, toWhom }) => {
         resolve({
           id: _id,
           name,
           description,
-          price: {
-            currency: price.currency.name,
-            value: price.value
-          },
-          age: age.name,
-          brand: brand.name,
-          category: category.name,
-          deliveryOption: deliveryOption.name,
-          occasion: occasion.name,
-          toWhom: toWhom.name
+          price,
+          ageRange: ageRange.value,
+          brand: brand.value,
+          category: category.value,
+          delivOpt: delivOpt.value,
+          occasion: occasion.value,
+          toWhom: toWhom.value
         })
-      })
-      .catch(e => reject(e))
+      }).catch(e => reject(e))
   })
 }
 
+// export module
 module.exports = getPopulate

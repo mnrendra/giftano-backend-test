@@ -1,7 +1,7 @@
 // require express Router
 const router = require('express').Router()
 // require error module
-const { methodNotAllowed } = require('../errors')
+const { notAllowedMethod } = require('../../errors')
 
 // set home GET request
 router.get('/', (req, res) => {
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   })
 })
 // prevent else method
-router.all('/', methodNotAllowed)
+router.all('/', notAllowedMethod)
 
 // export module
 module.exports = router

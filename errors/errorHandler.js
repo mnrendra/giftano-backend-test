@@ -1,6 +1,9 @@
 // require logger modules
-const logger = require('../../logger')
-// error handler
+const logger = require('../logger')
+
+/**
+ * errorHandler function
+ */
 const errorHandler = ({ name, message, stack }, req, res, next) => {
   // loging error into logs file
   logger.error(`${new Date()} : ${stack}`)

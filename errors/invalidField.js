@@ -1,5 +1,7 @@
-// invalid field handler
-const fieldInvalid = (res, message) => {
+/**
+ * invalidField function
+ */
+const invalidField = (res, message) => {
   res.status(400).json({
     status: 400,
     error: {
@@ -10,4 +12,4 @@ const fieldInvalid = (res, message) => {
 }
 
 // export module
-module.exports = fieldInvalid
+module.exports = invalidField

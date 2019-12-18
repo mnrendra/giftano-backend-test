@@ -3,16 +3,18 @@ const { isValid } = require('mongoose').Types.ObjectId
 // require Brand model
 const { Brand } = require('../../models')
 // require error handler
-const { idInvalid, idNotFound } = require('../errors')
+const { invalidId, notFoundId } = require('../../errors')
 
-// deleteBrandsById function
+/**
+ * deleteBrandsById function
+ */
 const deleteBrandsById = ({ params }, res, next) => {
   // destructuring id parameter
   const { id } = params
 
-  // return false if id invalid
+  // return false if id is invalid
   if (!isValid(id)) {
-    idInvalid(id, res)
+    invalidId(res, id)
     return
   }
 
@@ -20,9 +22,9 @@ const deleteBrandsById = ({ params }, res, next) => {
   Brand
     .findOne({ _id: id })
     .then(brand => {
-      // return false if id not found
+      // return false if id is not found
       if (!brand) {
-        idNotFound(id, res)
+        notFoundId(res, id)
         return
       }
 
@@ -41,10 +43,8 @@ const deleteBrandsById = ({ params }, res, next) => {
               value
             }
           })
-        })
-        .catch(next)
-    })
-    .catch(next)
+        }).catch(next)
+    }).catch(next)
 }
 
 // export module

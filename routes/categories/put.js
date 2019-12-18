@@ -1,43 +1,59 @@
 // require isValid from mongoose ObjectId Types
 const { isValid } = require('mongoose').Types.ObjectId
+// require PRODUCT_PROPERTY config
+const { MIN_VALUE, MAX_VALUE } = require('config').PRODUCT_PROPERTY
 // require Category model
 const { Category } = require('../../models')
 // require error handler
-const { idInvalid, idNotFound } = require('../errors')
+const { invalidId, invalidField, requireField, notFoundId, sameValue } = require('../../errors')
 
 /**
  * putCategoriesById function
  */
 const putCategoriesById = ({ params, body }, res, next) => {
-  // desctructuring id parameter and value data
+  // desctructuring id parameter and value body field
   const { id } = params
   const { value } = body
 
-  // return false if id invalid
+  // return false if id is invalid
   if (!isValid(id)) {
-    idInvalid(id, res)
+    invalidId(res, id)
     return
   }
+
+  /* validate body field */
+
+  // validate value field
+  if (!value) {
+    requireField(res, 'value')
+    return
+  }
+  // length value cannot be less than MIN_VALUE characters
+  if (value.length < MIN_VALUE) {
+    invalidField(res, `length value cannot be less than ${MIN_VALUE} characters`)
+    return
+  }
+  // length value cannot be more than MAX_VALUE characters
+  if (value.length > MAX_VALUE) {
+    invalidField(res, `length value cannot be more than ${MAX_VALUE} characters`)
+    return
+  }
+
+  /* check existing */
 
   // check existing first
   Category
     .findOne({ _id: id })
     .then(category => {
-      // return false if id not found
+      // return false if id is not found
       if (!category) {
-        idNotFound(id, res)
+        notFoundId(res, id)
         return
       }
 
-      // prevent update if hase same value
+      // ignore update if has same value
       if (value === category.value) {
-        res.status(400).json({
-          status: 400,
-          error: {
-            name: 'same value!',
-            message: 'data value is same.'
-          }
-        })
+        sameValue(res)
         return
       }
 
@@ -56,10 +72,8 @@ const putCategoriesById = ({ params, body }, res, next) => {
               value
             }
           })
-        })
-        .catch(next)
-    })
-    .catch(next)
+        }).catch(next)
+    }).catch(next)
 }
 
 // export module

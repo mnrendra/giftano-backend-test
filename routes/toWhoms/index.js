@@ -5,7 +5,7 @@ const { getToWhoms, getToWhomsById } = require('./get')
 const { postToWhoms } = require('./post')
 const { putToWhomsById } = require('./put')
 const { deleteToWhomsById } = require('./delete')
-const { methodNotAllowed, idRequired } = require('../errors')
+const { notAllowedMethod, requireId } = require('../../errors')
 
 // GET request
 router.get('/', getToWhoms)
@@ -13,13 +13,13 @@ router.get('/:id', getToWhomsById)
 // POST request
 router.post('/', postToWhoms)
 // PUT request
-router.put('/', idRequired)
+router.put('/', requireId)
 router.put('/:id', putToWhomsById)
 // DELETE request
-router.delete('/', idRequired)
+router.delete('/', requireId)
 router.delete('/:id', deleteToWhomsById)
 // ALL request
-router.all('/', methodNotAllowed)
+router.all('/', notAllowedMethod)
 
 // export module
 module.exports = router

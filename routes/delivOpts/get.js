@@ -3,7 +3,7 @@ const { isValid } = require('mongoose').Types.ObjectId
 // require DelivOpt model
 const { DelivOpt } = require('../../models')
 // require error handler
-const { idInvalid, idNotFound } = require('../errors')
+const { invalidId, notFoundId } = require('../../errors')
 
 /**
  * getDelivOpts function
@@ -23,8 +23,7 @@ const getDelivOpts = (req, res, next) => {
         status: 200,
         data
       })
-    })
-    .catch(next)
+    }).catch(next)
 }
 
 /**
@@ -34,9 +33,9 @@ const getDelivOptsById = ({ params }, res, next) => {
   // destructuring id parameter
   const { id } = params
 
-  // return false if id invalid
+  // return false if id is invalid
   if (!isValid(id)) {
-    idInvalid(id, res)
+    invalidId(res, id)
     return
   }
 
@@ -44,9 +43,9 @@ const getDelivOptsById = ({ params }, res, next) => {
   DelivOpt
     .findOne({ _id: id })
     .then(data => {
-      // return false if id not found
+      // return false if id is not found
       if (!data) {
-        idNotFound(id, res)
+        notFoundId(res, id)
         return
       }
 
@@ -61,8 +60,7 @@ const getDelivOptsById = ({ params }, res, next) => {
           value
         }
       })
-    })
-    .catch(next)
+    }).catch(next)
 }
 
 // export module
