@@ -1,8 +1,8 @@
 # Giftano Backend Take Home Assignement
 This is my [Giftano](https://giftano.com) take home assignment based on [Giftano-Backend-Test](https://github.com/mnrendra/giftano-backend-test/blob/master/Backend-Developer-Take-Home-Assignment.pdf) document.<br/>
 This assignment is to create Backend RESTful API for CRUD product and the category.<br/>
-I built this assignment using `NodeJs` for the runtime, `ExpressJs` for the RESTful framework, and `MongoDB` for the databse.<br/>
-And I deploy the result for live demo in [AWS](http://54.179.136.16/giftano-backend) and [Digitalocean](http://178.128.88.151/giftano-backend).<br/>
+This assignment was built using `NodeJs` for the runtime, `ExpressJs` for the RESTful framework, and `MongoDB` for the databse.<br/>
+And the results have been deploy in [AWS](http://54.179.136.16/giftano-backend) and [Digitalocean](http://178.128.88.151/giftano-backend).<br/>
 Below is the API documentation:
 
 # API Documentations
@@ -17,8 +17,8 @@ Below is the query parameters and the default values.
 |---|---|---|---|
 | `limit` | `3` | Limitation of products number per request. This is intended for pagination. | `GET /products?limi=10` will return 10 products per request |
 | `page` | `0` | Page request number *start from 0. This is combined with `limit` for pagination. | `GET /products?page=1` will return page number two |
-| `minPrice` | `0` | Filter products that only have a price above the `minPrice` value. | `GET /products?minPrice=100` will return products where price value is more than 100 SGD (if currency set as SGD) |
-| `maxPrice` | `1000000` | Filter products that only have a price below the `minPrice` value. | `GET /products?maxPrice=1000` will return products where price value is less than 1000 SGD (if currency set as SGD) |
+| `minPrice` | `0` | Filter products that only have a price above the `minPrice` value. | `GET /products?minPrice=100` will return products where price value is more than 100 |
+| `maxPrice` | `1000000` | Filter products that only have a price below the `minPrice` value. | `GET /products?maxPrice=1000` will return products where price value is less than 1000 |
 | `sortBy` || Sort products based on parameter value. This is the parameter value options:<br/>`priceAsc` sort by price in ascending order,<br/>`priceDes` sort by price in descending order,<br/>`nameAsc` sort by name in ascending order,<br/>`nameDes` sort by name in decending order. | `GET /products?sortBy=priceAsc` will return products sort by price in ascending |
 | `ageRange` || Filter products by age range | `GET /products?ageRange=20to30years` will return products that age range only has value `20to30years` |
 | `brand` || Filter products by brand | `GET /products?brand=1-Altitude` will return products that brand only has value `1-Altitude` |
@@ -26,6 +26,7 @@ Below is the query parameters and the default values.
 | `delivOpt` || Filter products by delivery option | `GET /products?delivOpt=Send by E-Gift Card` will return products that delivery option only has value `Send by E-Gift Card` |
 | `occasion` || Filter products by occasion | `GET /products?occasion=Christmas Gifts` will return products that occasion only has value `Christmas Gifts` |
 | `toWhom` || Filter products by to whom | `GET /products?toWhom=Gifts For Dad` will return products that to whom only has value `Gifts For Dad` |
+
 *This default value can be changed in `/config/default.josn` file.
 
 #### Example:
@@ -116,6 +117,7 @@ Below is data requirements:
 | `delivOptId` | `ObjectId` | The value should be a delivOpt-id that get from `GET /delivOpts` |
 | `occasionId` | `ObjectId` | The value should be an occasion-id that get from `GET /occasions` |
 | `toWhomId` | `ObjectId` | The value should be a toWhom-id that get from `GET /towhoms` |
+
 *This specification can be changed in `/config/default.josn` file.
 
 ### Example:
