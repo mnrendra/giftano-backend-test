@@ -19,7 +19,7 @@ Below is the query parameters and the default values.
 | `page` | `0` | Page request number *start from 0. This is combined with `limit` for pagination. | `GET /products?page=1` will return page number two |
 | `minPrice` | `0` | Filter products that only have a price above the `minPrice` value. | `GET /products?minPrice=100` will return products where price value is more than 100 |
 | `maxPrice` | `1000000` | Filter products that only have a price below the `minPrice` value. | `GET /products?maxPrice=1000` will return products where price value is less than 1000 |
-| `sortBy` || Sort products based on parameter value. This is the parameter value options:<br/>`priceAsc` sort by price in ascending order,<br/>`priceDes` sort by price in descending order,<br/>`nameAsc` sort by name in ascending order,<br/>`nameDes` sort by name in decending order. | `GET /products?sortBy=priceAsc` will return products sort by price in ascending |
+| `sortBy` || Sort products based on parameter value.<br/><i>This is the parameter value options:</i><br/>`priceAsc` sort by price in ascending order,<br/>`priceDes` sort by price in descending order,<br/>`nameAsc` sort by name in ascending order,<br/>`nameDes` sort by name in decending order. | `GET /products?sortBy=priceAsc` will return products sort by price in ascending |
 | `ageRange` || Filter products by age range | `GET /products?ageRange=20to30years` will return products that age range only has value `20to30years` |
 | `brand` || Filter products by brand | `GET /products?brand=1-Altitude` will return products that brand only has value `1-Altitude` |
 | `category` || Filter products by category | `GET /products?category=Popular Gifts` will return products that category only has value `Popular Gifts` |
@@ -101,7 +101,7 @@ response:
 
 <hr/>
 
-### POST /products
+### `POST /products`
 Post new product.<br/>
 This API require data to post as new product.<br/>
 Below is data requirements:
@@ -120,10 +120,10 @@ Below is data requirements:
 
 *This specification can be changed in `/config/default.josn` file.
 
-### Example:
+#### Example:
 
 request:
-### POST /products
+#### `POST /products`
 
 data:
 ```json
@@ -151,15 +151,15 @@ response:
 ```
 <hr/>
 
-## PUT /products/:id
+### `PUT /products/:id`
 Update product data.<br/>
 This API require product-id that will be updated.<br>
 And this API require data option for update the data.
 
-### Example:
+#### Example:
 
 request:
-### POST /products/5dfb18af483624089b63c0f5
+#### `PUT /products/5dfb18af483624089b63c0f5`
 
 data:
 ```json
@@ -178,14 +178,14 @@ response:
 ```
 <hr/>
 
-## DELETE /products/:id
+### `DELETE /products/:id`
 Delete product document.<br/>
 This API require product-id that will be deleted.
 
-### Example:
+#### Example:
 
 request:
-### DELETE /products/5dfb18af483624089b63c0f5
+#### `DELETE /products/5dfb18af483624089b63c0f5`
 
 response:
 ```json
