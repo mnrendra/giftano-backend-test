@@ -25,6 +25,7 @@ Below is the documentation for the query:
 | `delivOpt` |           | filter by delivery option                                                              | `GET /products?delivOpt=Send by E-Gift Card` will return documents where delivery option only has value `Send by E-Gift Card` |
 | `occasion` |           | filter by occasion                                                                     | `GET /products?occasion=Christmas Gifts` will return documents where occasion only has value `Christmas Gifts`                |
 | `toWhom`   |           | filter by to whom                                                                      | `GET /products?toWhom=Gifts For Dad` will return documents where to whom only has value `Gifts For Dad`                       |
+
 #### Example:
 request:
 #### `GET /products?limit=5&page=0&minPrice=500&maxPrice=1000&toWhom=Gifts For Mum&sortBy=priceDes`
@@ -106,18 +107,20 @@ response:
 
 ### POST /products
 Post new product.<br/>
+
 Data requirements:
-| Field         | Type       | Specification                                                                          |
-|---------------|------------|----------------------------------------------------------------------------------------|
-| `name`        | `String`   | minimal length is 3 characters and maximum length is 63 characters                     |
-| `description` | `String`   | minimal length is 12 characters and maximum length is 255 characters                   |
-| `price`       | `Number`   | minimal value is 0.01 and maximum length is 999999.99 characters                       |
-| `ageRangeId`  | `ObjectId` | ageRange id `get from GET /ageranges`                                                  |
-| `brandId`     | `ObjectId` | brand id `get from GET /brands`                                                        |
-| `categoryId`  | `ObjectId` | category id `get from GET /categories`                                                 |
-| `delivOptId`  | `ObjectId` | delivOpt id `get from GET /delivOpts`                                                  |
-| `occasionId`  | `ObjectId` | occasion id `get from GET /occasions`                                                  |
-| `toWhomId`    | `ObjectId` | toWhom id `get from GET /towhoms`                                                      |
+
+| Field         | Type       | Specification                                                        |
+|---------------|------------|----------------------------------------------------------------------|
+| `name`        | `String`   | minimal length is 3 characters and maximum length is 63 characters   |
+| `description` | `String`   | minimal length is 12 characters and maximum length is 255 characters |
+| `price`       | `Number`   | minimal value is 0.01 and maximum length is 999999.99 characters     |
+| `ageRangeId`  | `ObjectId` | ageRange id `get from GET /ageranges`                                |
+| `brandId`     | `ObjectId` | brand id `get from GET /brands`                                      |
+| `categoryId`  | `ObjectId` | category id `get from GET /categories`                               |
+| `delivOptId`  | `ObjectId` | delivOpt id `get from GET /delivOpts`                                |
+| `occasionId`  | `ObjectId` | occasion id `get from GET /occasions`                                |
+| `toWhomId`    | `ObjectId` | toWhom id `get from GET /towhoms`                                    |
 
 #### Example:
 request:
