@@ -4,7 +4,8 @@
   "description": "My Giftano backend take home assignment",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ."
+    "dev": "nodemon .",
+    "production": "node ."
   },
   "repository": {
     "type": "git",
