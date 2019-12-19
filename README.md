@@ -1,7 +1,12 @@
 # Giftano Backend Take Home Assignement
 This is my [Giftano](https://giftano.com) take home assignment based on [Giftano-Backend-Test](https://github.com/mnrendra/giftano-backend-test/blob/master/Backend-Developer-Take-Home-Assignment.pdf) document.<br/>
 This assignment is to create Backend RESTful API for CRUD product and the category.<br/>
-This assignment was built using `NodeJs` for the runtime, `ExpressJs` for the RESTful framework, and `MongoDB` for the databse.<br/>
+This assignment was built using:<br/>
+`NodeJs` for the runtime,<br/>
+`ExpressJs` for the RESTful framework,<br/>
+`MongoDB` for the databse,<br/>
+and several NodeJs frameworks for the utilities.
+<br/>
 And the results have been deploy in [AWS](http://54.179.136.16/giftano-backend) and [Digitalocean](http://178.128.88.151/giftano-backend).<br/>
 Below is the API documentation:
 
@@ -197,3 +202,100 @@ response:
 }
 ```
 <hr/>
+
+## `/ageranges` endpoint
+
+### `GET /ageranges`
+Get all ageRanges.
+#### Example:
+request:
+#### `GET /ageranges`
+response:
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "id": "5dfb14f0483624089b63c0e0",
+      "value": "20to30years"
+    },
+    ...
+  ]
+}
+```
+
+### `GET /ageranges/:id`
+Get ageRanges by ageRange-id.
+#### Example:
+request:
+#### `GET /ageranges/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "data": {
+    "id": "5dfb14f0483624089b63c0e0",
+    "value": "20to30years"
+  }
+}
+```
+
+### `POST /ageranges`
+Post new ageRange.<br>
+Require value data to post as new ageRange.
+#### Example:
+request:
+#### `POST /ageranges`
+data:
+```json
+{
+  "value": "20to30years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully creating new agerange"
+  }
+}
+```
+
+### `PUT /ageranges/:id`
+Update agaRange data.<br/>
+Require ageRange-id that will be updated.
+#### Example:
+request:
+#### `PUT /ageranges/5dfb14f0483624089b63c0e0`
+data:
+```json
+{
+  "value": "30to40years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully update agerange"
+  }
+}
+```
+
+### `DELETE /ageranges/:id`
+Delete agaRange document
+Require ageRange-id that will be deleted.
+#### Example:
+request:
+#### `DELETE /ageranges/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully delete agerange"
+  }
+}
+```
