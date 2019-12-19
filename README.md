@@ -18,3 +18,51 @@ This is backend RESTful API for CRUD products and categories databse wich cluste
 | `delivOpt` |           | filter by delivery option                                                              | `GET /products?delivOpt=Send by E-Gift Card` will return documents where delivery option only has value `Send by E-Gift Card` |
 | `occasion` |           | filter by occasion                                                                     | `GET /products?occasion=Christmas Gifts` will return documents where occasion only has value `Christmas Gifts`                |
 | `toWhom`   |           | filter by to whom                                                                      | `GET /products?toWhom=Gifts For Dad` will return documents where to whom only has value `Gifts For Dad`                       |
+#### Examples
+#### `GET /products?limit=5&page=0&minPrice=500&maxPrice=1000&toWhom=Gifts For Mum&sortBy=priceDes`
+```json
+
+  "status": 200,
+  "total": 3,
+  "limit": 5,
+  "page": 0,
+  "data": [
+    {
+      "id": "5dfb1ba2483624089b63c0fd",
+      "name": "Ninth Product",
+      "description": "this is 9th product",
+      "price": 901.23,
+      "ageRange": "40to50years",
+      "brand": "Alma by Juan Amador | Eurasian Michelin-star Dining",
+      "category": "Best Experience Gifts in Singapore",
+      "delivOpt": "Send by Email",
+      "occasion": "Anniversary Gifts",
+      "toWhom": "Gifts For Mum"
+    },
+    {
+      "id": "5dfb1b85483624089b63c0fc",
+      "name": "Eighth Product",
+      "description": "this is 8th product",
+      "price": 890.12,
+      "ageRange": "40to50years",
+      "brand": "AJ Hackett Singapore: Bungy Jumping",
+      "category": "Best Experience Gifts in Singapore",
+      "delivOpt": "Send by Email",
+      "occasion": "Anniversary Gifts",
+      "toWhom": "Gifts For Mum"
+    },
+    {
+      "id": "5dfb1b5e483624089b63c0fb",
+      "name": "Seventh Product",
+      "description": "this is 7th product",
+      "price": 789.01,
+      "ageRange": "30to40years",
+      "brand": "AJ Hackett Singapore: Bungy Jumping",
+      "category": "Best Experience Gifts in Singapore",
+      "delivOpt": "Send by Email",
+      "occasion": "Anniversary Gifts",
+      "toWhom": "Gifts For Mum"
+    }
+  ]
+}
+```
