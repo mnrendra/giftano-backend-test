@@ -147,21 +147,11 @@ const postProducts = ({ body }, res, next) => {
     // save new Product
     newProduct
       .save()
-      .then(({ _id, name, description, price }) => {
+      .then(() => {
         res.status(200).json({
           status: 200,
-          success: 'successfully create new product!',
-          data: {
-            id: _id,
-            name,
-            description,
-            price,
-            ageRange: properties.ageRange,
-            brand: properties.brand,
-            category: properties.category,
-            delivOpt: properties.delivOpt,
-            occasion: properties.occasion,
-            toWhom: properties.toWhom
+          success: {
+            message: 'successfully create new document!'
           }
         })
       }).catch(next)

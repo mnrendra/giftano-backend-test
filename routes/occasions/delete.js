@@ -28,19 +28,14 @@ const deleteOccasionsById = ({ params }, res, next) => {
         return
       }
 
-      // destructuring _id, value from occasion
-      const { _id, value } = occasion
-
       // delete the document
       Occasion
         .deleteOne({ _id: id })
         .then(() => {
           res.status(200).json({
             status: 200,
-            success: 'successfully deleted.',
-            data: {
-              id: _id,
-              value
+            success: {
+              message: 'successfully delete document!'
             }
           })
         }).catch(next)

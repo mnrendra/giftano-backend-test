@@ -63,13 +63,11 @@ const putOccasionsById = ({ params, body }, res, next) => {
       // save new changes
       occasion
         .save()
-        .then(({ _id, value }) => {
+        .then(() => {
           res.status(200).json({
             status: 200,
-            success: 'successfully updated!',
-            data: {
-              id: _id,
-              value
+            success: {
+              message: 'successfully update document!'
             }
           })
         }).catch(next)

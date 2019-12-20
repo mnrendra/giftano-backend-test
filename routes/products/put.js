@@ -164,18 +164,8 @@ const putProductsById = ({ params, body }, res, next) => {
         .then(({ _id, name, description, price, ageRange, brand, category, delivOpt, occasion, toWhom }) => {
           res.status(200).json({
             status: 200,
-            message: 'successfully update product.',
-            data: {
-              id: _id,
-              name,
-              description,
-              price,
-              ageRange,
-              brand,
-              category,
-              delivOpt,
-              occasion,
-              toWhom
+            success: {
+              message: 'successfully update document!'
             }
           })
         }).catch(next)

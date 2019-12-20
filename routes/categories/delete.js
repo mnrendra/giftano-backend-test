@@ -28,19 +28,14 @@ const deleteCategoriesById = ({ params }, res, next) => {
         return
       }
 
-      // destructuring _id, value from category
-      const { _id, value } = category
-
       // delete the document
       Category
         .deleteOne({ _id: id })
         .then(() => {
           res.status(200).json({
             status: 200,
-            success: 'successfully deleted.',
-            data: {
-              id: _id,
-              value
+            success: {
+              message: 'successfully delete document!'
             }
           })
         }).catch(next)

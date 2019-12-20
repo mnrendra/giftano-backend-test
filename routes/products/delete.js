@@ -32,22 +32,10 @@ const deleteProductsById = ({ params }, res, next) => {
       Product
         .deleteOne({ _id: id })
         .then(() => {
-          // destructuring product properties and keep _id, _v keys
-          const { _id, name, description, price, ageRange, brand, category, delivOpt, occasion, toWhom } = product
           res.status(200).json({
             status: 200,
-            message: 'successfully delete product.',
-            data: {
-              id: _id,
-              name,
-              description,
-              price,
-              ageRange,
-              brand,
-              category,
-              delivOpt,
-              occasion,
-              toWhom
+            success: {
+              message: 'successfully delete document!'
             }
           })
         }).catch(next)

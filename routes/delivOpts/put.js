@@ -63,13 +63,11 @@ const putDelivOptsById = ({ params, body }, res, next) => {
       // save new changes
       delivOpt
         .save()
-        .then(({ _id, value }) => {
+        .then(() => {
           res.status(200).json({
             status: 200,
-            success: 'successfully updated!',
-            data: {
-              id: _id,
-              value
+            success: {
+              message: 'successfully update document!'
             }
           })
         }).catch(next)

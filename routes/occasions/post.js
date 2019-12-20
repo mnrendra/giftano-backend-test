@@ -48,13 +48,11 @@ const postOccasions = ({ body }, res, next) => {
       // save new Occasion
       newOccasion
         .save()
-        .then(({ _id, value }) => {
+        .then(() => {
           res.status(200).json({
             status: 200,
-            success: 'successfully create new document!',
-            data: {
-              id: _id,
-              value
+            success: {
+              message: 'successfully create new document!'
             }
           })
         }).catch(next)
