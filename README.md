@@ -7,8 +7,8 @@ This assignment was built using:<br/>
 `MongoDB` for the databse,<br/>
 and several NodeJs frameworks for the utilities.
 <br/>
-And the results have been deploy in [AWS](http://54.179.136.16/giftano-backend) and [Digitalocean](http://178.128.88.151/giftano-backend).<br/>
-The database cloud on `MongoDB Atlas`.
+And the results have been deploy in [AWS](http://54.179.136.166/giftano-backend) and [Digitalocean](http://178.128.88.151/giftano-backend).<br/>
+The database cloud on `MongoDB Atlas`.<br/>
 Below is the API documentation:
 
 # API Documentations
@@ -116,13 +116,13 @@ Below is data requirements:
 |---|---|---|
 | `name` | `String` | minimum length is 3 characters and maximum length is 63 characters |
 | `description` | `String` | minimum length is 12 characters and maximum length is 255 characters |
-| `price` | `Number` | minimum value is 0.01 and maximum length is 999999.99 characters |
-| `ageRangeId` | `ObjectId` | The value should be an ageRange-id that get from `GET /ageranges` |
-| `brandId` | `ObjectId` | The value should be a brand-id that get from `GET /brands` |
-| `categoryId` | `ObjectId` | The value should be a category-id that get from `GET /categories` |
-| `delivOptId` | `ObjectId` | The value should be a delivOpt-id that get from `GET /delivOpts` |
-| `occasionId` | `ObjectId` | The value should be an occasion-id that get from `GET /occasions` |
-| `toWhomId` | `ObjectId` | The value should be a toWhom-id that get from `GET /towhoms` |
+| `price` | `Number` | minimum value is 0.01 and maximum length is 999999.99 |
+| `ageRangeId` | `ObjectId` | The value should be an ageRange-id which is get from `GET /ageranges` |
+| `brandId` | `ObjectId` | The value should be a brand-id which is get from `GET /brands` |
+| `categoryId` | `ObjectId` | The value should be a category-id which is get from `GET /categories` |
+| `delivOptId` | `ObjectId` | The value should be a delivOpt-id which is get from `GET /delivOpts` |
+| `occasionId` | `ObjectId` | The value should be an occasion-id which is get from `GET /occasions` |
+| `toWhomId` | `ObjectId` | The value should be a toWhom-id which is get from `GET /towhoms` |
 
 *This specification can be changed in `/config/default.josn` file.
 
