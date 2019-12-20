@@ -8,6 +8,7 @@ This assignment was built using:<br/>
 and several NodeJs frameworks for the utilities.
 <br/>
 And the results have been deploy in [AWS](http://54.179.136.16/giftano-backend) and [Digitalocean](http://178.128.88.151/giftano-backend).<br/>
+The database cloud on `MongoDB Atlas`.
 Below is the API documentation:
 
 # API Documentations
@@ -24,13 +25,13 @@ Below is the query parameters and the default values.
 | `page` | `0` | Page request number *start from 0. This is combined with `limit` for pagination. | `GET /products?page=1` will return page number two |
 | `minPrice` | `0` | Filter products that only have a price above the `minPrice` value. | `GET /products?minPrice=100` will return products where price value is more than 100 |
 | `maxPrice` | `1000000` | Filter products that only have a price below the `minPrice` value. | `GET /products?maxPrice=1000` will return products where price value is less than 1000 |
-| `sortBy` || Sort products based on parameter value.<br/><i>This is the parameter value options:</i><br/>`priceAsc` sort by price in ascending order,<br/>`priceDes` sort by price in descending order,<br/>`nameAsc` sort by name in ascending order,<br/>`nameDes` sort by name in decending order. | `GET /products?sortBy=priceAsc` will return products sort by price in ascending |
-| `ageRange` || Filter products by age range | `GET /products?ageRange=20to30years` will return products that age range only has value `20to30years` |
-| `brand` || Filter products by brand | `GET /products?brand=1-Altitude` will return products that brand only has value `1-Altitude` |
-| `category` || Filter products by category | `GET /products?category=Popular Gifts` will return products that category only has value `Popular Gifts` |
-| `delivOpt` || Filter products by delivery option | `GET /products?delivOpt=Send by E-Gift Card` will return products that delivery option only has value `Send by E-Gift Card` |
-| `occasion` || Filter products by occasion | `GET /products?occasion=Christmas Gifts` will return products that occasion only has value `Christmas Gifts` |
-| `toWhom` || Filter products by to whom | `GET /products?toWhom=Gifts For Dad` will return products that to whom only has value `Gifts For Dad` |
+| `sortBy` || Sort products based on parameter value.<br/><i>Below is the parameter value options:</i><br/>`priceAsc` sort by price in ascending order,<br/>`priceDes` sort by price in descending order,<br/>`nameAsc` sort by name in ascending order,<br/>`nameDes` sort by name in decending order. | `GET /products?sortBy=priceAsc` will return products sort by price in ascending order. |
+| `ageRange` || Filter products by age range | `GET /products?ageRange=20to30years` will only return products that age range has value `20to30years` |
+| `brand` || Filter products by brand | `GET /products?brand=1-Altitude` will only return products that brand has value `1-Altitude` |
+| `category` || Filter products by category | `GET /products?category=Popular Gifts` will only return products that category has value `Popular Gifts` |
+| `delivOpt` || Filter products by delivery option | `GET /products?delivOpt=Send by E-Gift Card` will only return products that delivery option has value `Send by E-Gift Card` |
+| `occasion` || Filter products by occasion | `GET /products?occasion=Christmas Gifts` will only return products that occasion has value `Christmas Gifts` |
+| `toWhom` || Filter products by to whom | `GET /products?toWhom=Gifts For Dad` will only return products that to whom has value `Gifts For Dad` |
 
 *This default value can be changed in `/config/default.josn` file.
 
@@ -218,8 +219,7 @@ response:
     {
       "id": "5dfb14f0483624089b63c0e0",
       "value": "20to30years"
-    },
-    ...
+    }
   ]
 }
 ```
@@ -242,7 +242,7 @@ response:
 
 ### `POST /ageranges`
 Post new ageRange.<br>
-Require value data to post as new ageRange.
+Require `value` data to post as new ageRange.
 #### Example:
 request:
 #### `POST /ageranges`
@@ -264,7 +264,8 @@ response:
 
 ### `PUT /ageranges/:id`
 Update agaRange data.<br/>
-Require ageRange-id that will be updated.
+Require ageRange-id that will be updated.<br/>
+And require value data for which to be updated.
 #### Example:
 request:
 #### `PUT /ageranges/5dfb14f0483624089b63c0e0`
@@ -285,7 +286,7 @@ response:
 ```
 
 ### `DELETE /ageranges/:id`
-Delete agaRange document
+Delete agaRange document.<br/>
 Require ageRange-id that will be deleted.
 #### Example:
 request:
@@ -296,6 +297,501 @@ response:
   "status": 200,
   "success": {
     "message": "Successfully delete agerange"
+  }
+}
+```
+
+<hr/>
+
+## `/brands` endpoint
+
+### `GET /brands`
+Get all brands.
+#### Example:
+request:
+#### `GET /brands`
+response:
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "id": "5dfb14f0483624089b63c0e0",
+      "value": "20to30years"
+    }
+  ]
+}
+```
+
+### `GET /brands/:id`
+Get brands by brand-id.
+#### Example:
+request:
+#### `GET /brands/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "data": {
+    "id": "5dfb14f0483624089b63c0e0",
+    "value": "20to30years"
+  }
+}
+```
+
+### `POST /brands`
+Post new brand.<br>
+Require `value` data to post as new brand.
+#### Example:
+request:
+#### `POST /brands`
+data:
+```json
+{
+  "value": "20to30years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully creating new brand"
+  }
+}
+```
+
+### `PUT /brands/:id`
+Update agaRange data.<br/>
+Require brand-id that will be updated.<br/>
+And require value data for which to be updated.
+#### Example:
+request:
+#### `PUT /brands/5dfb14f0483624089b63c0e0`
+data:
+```json
+{
+  "value": "30to40years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully update brand"
+  }
+}
+```
+
+### `DELETE /brands/:id`
+Delete agaRange document.<br/>
+Require brand-id that will be deleted.
+#### Example:
+request:
+#### `DELETE /brands/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully delete brand"
+  }
+}
+```
+
+<hr/>
+
+## `/categories` endpoint
+
+### `GET /categories`
+Get all categories.
+#### Example:
+request:
+#### `GET /categories`
+response:
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "id": "5dfb14f0483624089b63c0e0",
+      "value": "20to30years"
+    }
+  ]
+}
+```
+
+### `GET /categories/:id`
+Get categories by category-id.
+#### Example:
+request:
+#### `GET /categories/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "data": {
+    "id": "5dfb14f0483624089b63c0e0",
+    "value": "20to30years"
+  }
+}
+```
+
+### `POST /categories`
+Post new category.<br>
+Require `value` data to post as new category.
+#### Example:
+request:
+#### `POST /categories`
+data:
+```json
+{
+  "value": "20to30years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully creating new category"
+  }
+}
+```
+
+### `PUT /categories/:id`
+Update agaRange data.<br/>
+Require category-id that will be updated.<br/>
+And require value data for which to be updated.
+#### Example:
+request:
+#### `PUT /categories/5dfb14f0483624089b63c0e0`
+data:
+```json
+{
+  "value": "30to40years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully update category"
+  }
+}
+```
+
+### `DELETE /categories/:id`
+Delete agaRange document.<br/>
+Require category-id that will be deleted.
+#### Example:
+request:
+#### `DELETE /categories/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully delete category"
+  }
+}
+```
+
+<hr/>
+
+## `/delivopts` endpoint
+
+### `GET /delivopts`
+Get all delivopts.
+#### Example:
+request:
+#### `GET /delivopts`
+response:
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "id": "5dfb14f0483624089b63c0e0",
+      "value": "20to30years"
+    }
+  ]
+}
+```
+
+### `GET /delivopts/:id`
+Get delivopts by delivopt-id.
+#### Example:
+request:
+#### `GET /delivopts/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "data": {
+    "id": "5dfb14f0483624089b63c0e0",
+    "value": "20to30years"
+  }
+}
+```
+
+### `POST /delivopts`
+Post new delivopt.<br>
+Require `value` data to post as new delivopt.
+#### Example:
+request:
+#### `POST /delivopts`
+data:
+```json
+{
+  "value": "20to30years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully creating new delivopt"
+  }
+}
+```
+
+### `PUT /delivopts/:id`
+Update agaRange data.<br/>
+Require delivopt-id that will be updated.<br/>
+And require value data for which to be updated.
+#### Example:
+request:
+#### `PUT /delivopts/5dfb14f0483624089b63c0e0`
+data:
+```json
+{
+  "value": "30to40years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully update delivopt"
+  }
+}
+```
+
+### `DELETE /delivopts/:id`
+Delete agaRange document.<br/>
+Require delivopt-id that will be deleted.
+#### Example:
+request:
+#### `DELETE /delivopts/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully delete delivopt"
+  }
+}
+```
+
+<hr/>
+
+## `/occasions` endpoint
+
+### `GET /occasions`
+Get all occasions.
+#### Example:
+request:
+#### `GET /occasions`
+response:
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "id": "5dfb14f0483624089b63c0e0",
+      "value": "20to30years"
+    }
+  ]
+}
+```
+
+### `GET /occasions/:id`
+Get occasions by occasion-id.
+#### Example:
+request:
+#### `GET /occasions/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "data": {
+    "id": "5dfb14f0483624089b63c0e0",
+    "value": "20to30years"
+  }
+}
+```
+
+### `POST /occasions`
+Post new occasion.<br>
+Require `value` data to post as new occasion.
+#### Example:
+request:
+#### `POST /occasions`
+data:
+```json
+{
+  "value": "20to30years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully creating new occasion"
+  }
+}
+```
+
+### `PUT /occasions/:id`
+Update agaRange data.<br/>
+Require occasion-id that will be updated.<br/>
+And require value data for which to be updated.
+#### Example:
+request:
+#### `PUT /occasions/5dfb14f0483624089b63c0e0`
+data:
+```json
+{
+  "value": "30to40years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully update occasion"
+  }
+}
+```
+
+### `DELETE /occasions/:id`
+Delete agaRange document.<br/>
+Require occasion-id that will be deleted.
+#### Example:
+request:
+#### `DELETE /occasions/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully delete occasion"
+  }
+}
+```
+
+<hr/>
+
+## `/towhoms` endpoint
+
+### `GET /towhoms`
+Get all towhoms.
+#### Example:
+request:
+#### `GET /towhoms`
+response:
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "id": "5dfb14f0483624089b63c0e0",
+      "value": "20to30years"
+    }
+  ]
+}
+```
+
+### `GET /towhoms/:id`
+Get towhoms by towhom-id.
+#### Example:
+request:
+#### `GET /towhoms/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "data": {
+    "id": "5dfb14f0483624089b63c0e0",
+    "value": "20to30years"
+  }
+}
+```
+
+### `POST /towhoms`
+Post new towhom.<br>
+Require `value` data to post as new towhom.
+#### Example:
+request:
+#### `POST /towhoms`
+data:
+```json
+{
+  "value": "20to30years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully creating new towhom"
+  }
+}
+```
+
+### `PUT /towhoms/:id`
+Update agaRange data.<br/>
+Require towhom-id that will be updated.<br/>
+And require value data for which to be updated.
+#### Example:
+request:
+#### `PUT /towhoms/5dfb14f0483624089b63c0e0`
+data:
+```json
+{
+  "value": "30to40years"
+}
+```
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully update towhom"
+  }
+}
+```
+
+### `DELETE /towhoms/:id`
+Delete agaRange document.<br/>
+Require towhom-id that will be deleted.
+#### Example:
+request:
+#### `DELETE /towhoms/5dfb14f0483624089b63c0e0`
+response:
+```json
+{
+  "status": 200,
+  "success": {
+    "message": "Successfully delete towhom"
   }
 }
 ```
